@@ -30,7 +30,7 @@ Run these once to authenticate and configure Docker access to Artifact Registry:
 ## 3. Deploy Infrastructure (without app)
 - Go to the root Terraform directory: `cd ../../`
 - Run Terraform to provision infrastructure like Artifact Registry and Cloud Run (but without deploying the app yet):
-    - terraform init
+    - terraform init --backend-config="backend.dev.hcl"
     - terraform apply -var="deploy_cloud_run=false"
 
 
