@@ -1,0 +1,54 @@
+# Next.js on GCP with Terraform
+
+This project deploys a containerized **Next.js application** to **Google Cloud Run**, 
+using **Terraform** for infrastructure management.
+
+---
+
+## Prerequisites
+
+Before starting, make sure you have:
+- A GCP project with billing enabled
+- Access to the appropriate service account or IAM permissions
+
+
+
+## 1. Authenticate with GCP
+
+Run these once to authenticate and configure Docker access to Artifact Registry:
+
+- `gcloud auth login`
+- `gcloud auth configure-docker europe-west9-docker.pkg.dev`
+
+
+## 2. Initialize Terraform State
+- cd state/dev/
+- terraform init
+- terraform plan
+- terraform apply
+
+## 3. Deploy Infrastructure (without app)
+- Go to the root Terraform directory: `cd ../../`
+- Run Terraform to provision infrastructure like Artifact Registry and Cloud Run (but without deploying the app yet):
+    - terraform init
+    - terraform apply -var="deploy_cloud_run=false"
+
+
+## 4. Build & Push the Docker Image
+
+Make sure you're authenticated (gcloud auth configure-docker again if needed), then:
+
+- docker build -t europe-west9-docker.pkg.dev/YOUR_PROJECT_ID/app-artifact-repo/app:latest .
+- docker push europe-west9-docker.pkg.dev/YOUR_PROJECT_ID/app-artifact-repo/app:latest
+
+Replace `YOUR_PROJECT_ID` with your actual GCP project ID.
+
+
+## 5. Deploy the App to Cloud Run
+After pushing the image, deploy the real app:
+- terraform apply -var="deploy_cloud_run=true"
+
+
+##  6. Access the App
+The app will be publicly accessible via the Cloud Run URL output by Terraform (cloud_run_url) 
+that you can also find in the CloudRun dashboard.
