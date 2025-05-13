@@ -24,6 +24,6 @@ module "cloudRun" {
   source       = "./modules/cloud-run"
   service_name = local.cloud_run_service_name
   region       = local.region
-  image_url    = "europe-west9-docker.pkg.dev/wise-ally-455315-a2/app-artifact-repo/app:latest"
+  image_url    = "europe-west9-docker.pkg.dev/${local.project_id}/${local.artifact_repo_name}/app:latest"
   count    = var.deploy_cloud_run ? 1 : 0
 }

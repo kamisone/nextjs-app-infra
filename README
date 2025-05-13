@@ -38,8 +38,8 @@ Run these once to authenticate and configure Docker access to Artifact Registry:
 
 Make sure you're authenticated (gcloud auth configure-docker again if needed), then:
 
-- docker build -t europe-west9-docker.pkg.dev/YOUR_PROJECT_ID/app-artifact-repo/app:latest .
-- docker push europe-west9-docker.pkg.dev/YOUR_PROJECT_ID/app-artifact-repo/app:latest
+- docker build -t europe-west9-docker.pkg.dev/YOUR_PROJECT_ID/YOUR_ARTIFACT_REPO_NAME/app:latest .
+- docker push europe-west9-docker.pkg.dev/YOUR_PROJECT_ID/YOUR_ARTIFACT_REPO_NAME/app:latest
 
 Replace `YOUR_PROJECT_ID` with your actual GCP project ID.
 
